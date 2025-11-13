@@ -66,6 +66,7 @@ def main():
         help="Line transparency. 0 = Fully transparent, 1 = No transparency",
     )
     parser.add_argument("--linewidth", default=0.4, help="Line width")
+    parser.add_argument("--linecolor", default="orange", help="Line color")
     parser.add_argument(
         "--activities_path", help="Path to activities.csv from Strava bulk export zip"
     )
@@ -170,6 +171,7 @@ def main():
             args.lat_max,
             args.alpha,
             args.linewidth,
+            args.linecolor,
             outfile,
         )
         print(f"Saved to {outfile}")

@@ -5,6 +5,8 @@ from math import log, pi, tan
 import matplotlib.pyplot as plt
 from rich.progress import track
 
+import plotly.express as px
+
 # Dummy units
 MAP_WIDTH = 1
 MAP_HEIGHT = 1
@@ -32,8 +34,9 @@ def plot_map(
     lon_max=None,
     lat_min=None,
     lat_max=None,
-    alpha=0.3,
+    alpha=1,
     linewidth=0.3,
+        linecolor="orange",
     output_file="map.png",
 ):
     # Create a new figure
@@ -64,11 +67,21 @@ def plot_map(
         x = x.transform(convert_x)
         y = y.transform(convert_y)
 
-        plt.plot(x, y, color="black", alpha=alpha, linewidth=linewidth)
+        plt.plot(x, y, color=linecolor, linewidth=linewidth)
+
+    # fig = px.line_mapbox(df, lat="lat", lon="lon",
+    #                      mapbox_style="carto-darkmatter",
+    #                      zoom=9,
+    #                      height=900,
+    #                      width=1500,
+    #                      title="Bike Rides",
+    #                      color_discrete_sequence=["orange"])
+
+    # fig.write_image(output_file)
 
     # Update plot aesthetics
     plt.axis("off")
     plt.axis("equal")
     plt.margins(0)
     plt.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95)
-    plt.savefig(output_file, dpi=600)
+    plt.savefig(output_file, dpi=600, transparent=True)
